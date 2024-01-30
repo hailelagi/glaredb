@@ -54,6 +54,8 @@ impl TableFunc for ReadPostgres {
                 let schema: String = args.next().unwrap().try_into()?;
                 let table: String = args.next().unwrap().try_into()?;
 
+                // test;
+
                 let access = PostgresAccess::new_from_conn_str(conn_str, None);
                 let prov_conf = PostgresTableProviderConfig {
                     access,
