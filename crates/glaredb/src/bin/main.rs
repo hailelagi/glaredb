@@ -1,5 +1,6 @@
 use anyhow::Result;
 use clap::{Parser, ValueEnum};
+use clap_complete::{generate, Generator, Shell};
 use glaredb::args::LocalArgs;
 use glaredb::commands::Commands;
 
