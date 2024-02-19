@@ -22,6 +22,9 @@ pub async fn json_streaming_table(
 
     let store = store_access.create_store()?;
 
+    /*
+    NOTE TO SELF: this is how multiple json files are read on disk
+     */
     // assume that the file type is a glob and see if there are
     // more files...
     let mut list = store_access.list_globbed(&store, path.as_ref()).await?;
@@ -34,7 +37,19 @@ pub async fn json_streaming_table(
     // sort by location
     list.sort_by(|a, b| a.location.cmp(&b.location));
 
+    /*
+    NOTE TO SELF:
+    currently only read the first (array/object) from a JSON file
+    using the new `read_json` function
+     */
+
+    /*
+     * HOW TO?? (next time think of this)
+     *  read the rest of the file(s) that we have if there were
+     * more documents and continue to parse them
+     */
     let mut data = Vec::new();
+
     {
         let first_obj = list
             .pop()
